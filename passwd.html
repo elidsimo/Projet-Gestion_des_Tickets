@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Réinitialiser le Mot de Passe - FC Barcelone</title>
+  <link rel="icon" href="logobarça.png" type="image/png" />
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .notification {
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .notification.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .notification.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .notification.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Réinitialisation du mot de passe - FC Barcelone</h1>
+  </header>
+
+  <img src="logobarça.png" alt="Logo FC Barcelone" class="photo" />
+
+  <div class="login-container">
+    <h2>Réinitialiser votre mot de passe</h2>
+
+    <div id="notificationMessage" class="notification"></div>
+
+    <form id="resetForm">
+      <input type="email" name="email" placeholder="Adresse e-mail" required />
+      <input type="password" name="new_password" placeholder="Nouveau mot de passe" required />
+      <button type="submit">Réinitialiser</button>
+    </form>
+
+    <div class="links">
+      <a href="connexion.html">Connectez-vous ici</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 FC Barcelone. Tous droits réservés.</p>
+      <div class="social-media">
+        <span style="margin-right: 1rem; font-weight: bold;">Suivez-nous :</span>
+        <a href="https://www.facebook.com/fcbarcelona" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://twitter.com/FCBarcelona" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/fcbarcelona/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/user/fcbarcelona" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@fcbarcelona" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('resetForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const notification = document.getElementById('notificationMessage');
+
+      notification.classList.remove('show', 'success', 'error');
+      notification.textContent = '';
+
+      fetch('reset_password.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        notification.textContent = data.message;
+        notification.classList.add(data.success ? 'success' : 'error', 'show');
+
+        if (data.success) form.reset();
+
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 5000);
+      })
+      .catch(() => {
+        notification.textContent = 'Erreur réseau. Veuillez réessayer.';
+        notification.classList.add('error', 'show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 5000);
+      });
+    });
+  </script>
+</body>
+</html>

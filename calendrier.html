@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendrier des Matches - FC Barcelona (2026)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="logobarça.png" type="image/png"> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1eaea;
+            background-image: url("barcaa.jpg"); /* Assurez-vous que cette image existe */
+            background-size: cover;
+            min-height: 100vh;
+            padding-bottom: 80px; /* Espace pour le footer fixe */
+        }
+
+        header {
+            background-color: #A50044;
+            color: rgb(255, 255, 255);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #003E7E;
+            padding: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 0.2rem;
+        }
+
+        nav a:hover {
+            background-color: #002B5C;
+            border-radius: 5px;
+            transform: translateY(-2px);
+        }
+
+        .nav-auth {
+            margin-left: auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-auth a {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .nav-auth a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        main {
+            padding: 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            color: #A50044;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .matches-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .match-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #A50044;
+        }
+
+        .match-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .match-card.clasico {
+            border-left-color: #FFD700;
+            background: linear-gradient(135deg, #fff9e6 0%, #f8f5e4 100%);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .match-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #A50044;
+        }
+
+        .match-time {
+            background: #003E7E;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .match-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .team-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            
+        }
+
+        .team-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .vs {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #A50044;
+            margin: 0 1rem;
+        }
+
+        .match-venue {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .venue-icon {
+            color: #003E7E;
+        }
+
+        .match-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #A50044, #003E7E);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #7F0033, #002B5C);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .buy-ticket {
+            background: linear-gradient(135deg, #A50044, #003E7E);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .buy-ticket:hover {
+            background: linear-gradient(135deg, #7F0033, #002B5C);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .indisponible {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .indisponible:hover {
+            transform: none;
+            box-shadow: none;
+            background: #ccc;
+        }
+
+        footer {
+            background-color: #A50044;
+            color: white;
+            text-align: center;
+            padding: 0rem 0; 
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-media i {
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .social-media i:hover {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
+
+        .social-media .fa-facebook:hover {
+            color: #1877F2;
+        }
+
+        .social-media .fa-twitter:hover {
+            color: #1DA1F2;
+        }
+
+        .social-media .fa-instagram:hover {
+            color: #E4405F;
+        }
+
+        .social-media .fa-youtube:hover {
+            color: #FF0000;
+        }
+
+        .social-media .fa-tiktok:hover {
+            color: #000000;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-auth {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            /* Styles spécifiques pour les matchs en mode mobile, si besoin */
+            .match-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .match-teams {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .vs {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+
+            .match-actions {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FC Barcelona - Calendrier des Matches </h1>
+    </header>
+
+    <nav>
+        <a href="accueil.html"><i class="fas fa-home"></i> Accueil</a>
+        <a href="calendrier.html"><i class="fas fa-calendar-alt"></i> Calendrier</a>
+        <a href="stade.html"><i class="fas fa-map-marker-alt"></i> Stade</a>
+        
+        <div class="nav-auth">
+            <a href="connexion.html"><i class="fas fa-sign-in-alt"></i> Déconnexion</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero-section">
+            <h2>⚽ Prochains Matchs du FC Barcelona </h2>
+            <p>Découvrez les rencontres clés de la saison 2026, avec le retour au Spotify Camp Nou !</p>
+        </div>
+
+        <div class="matches-container">
+            <div class="match-card">
+                <div class="match-header">
+                    <div class="match-date">📅 20 Juillet 2025</div>
+                    <div class="match-time">⏰ 19:00</div>
+                </div>
+                <div class="match-teams">
+                    <div class="team">
+                        <img src="logobarça.png" alt="FC Barcelona" class="team-logo">
+                        <span class="team-name">FC Barcelona</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <img src="RealBetis.png" alt="Real Betis" class="team-logo"> <span class="team-name">Real Betis</span>
+                    </div>
+                </div>
+                <div class="match-venue">
+                    <i class="venue-icon fas fa-map-marker-alt"></i>
+                    <span>Stade Olympique Lluís Companys, Barcelona</span>
+                </div>
+                <div class="match-actions">
+                    <a href="billet.html" class="buy-ticket">🎫 Acheter Billets</a>
+                </div>
+            </div>
+
+            <div class="match-card">
+                <div class="match-header">
+                    <div class="match-date">📅 15 Septembre 2025</div>
+                    <div class="match-time">⏰ 20:30</div>
+                </div>
+                <div class="match-teams">
+                    <div class="team">
+                        <img src="RealSociedad.png" alt="Real Sociedad" class="team-logo"> <span class="team-name">Real Sociedad</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <img src="logobarça.png" alt="FC Barcelona" class="team-logo">
+                        <span class="team-name">FC Barcelona</span>
+                    </div>
+                </div>
+                <div class="match-venue">
+                    <i class="venue-icon fas fa-map-marker-alt"></i>
+                    <span>Reale Arena, Saint-Sébastien</span>
+                    <span style="color: #A50044; font-weight: bold; margin-left: 10px;">Copa del Rey</span>
+                </div>
+                <div class="match-actions">
+                    <a href="#" class="buy-ticket indisponible">❌ Indisponible</a>
+                </div>
+            </div>
+
+            <div class="match-card">
+                <div class="match-header">
+                    <div class="match-date">📅 25 Octobre 2025</div>
+                    <div class="match-time">⏰ 21:00</div>
+                </div>
+                <div class="match-teams">
+                    <div class="team">
+                        <img src="logobarça.png" alt="FC Barcelona" class="team-logo">
+                        <span class="team-name">FC Barcelona</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <img src="ManchesterCity.png" alt="Manchester City" class="team-logo"> <span class="team-name">Manchester City</span>
+                    </div>
+                </div>
+                <div class="match-venue">
+                    <i class="venue-icon fas fa-map-marker-alt"></i>
+                    <span>Spotify Camp Nou, Barcelona</span> 
+                    <span style="color: #003E7E; font-weight: bold; margin-left: 10px;">UEFA Champions League</span>
+                </div>
+                <div class="match-actions">
+                    <a href="billet.html" class="buy-ticket">🎫 Acheter Billets</a>
+                </div>
+            </div>
+
+            <div class="match-card clasico">
+                <div class="match-header">
+                    <div class="match-date">📅 14 Décembre 2025</div>
+                    <div class="match-time">⏰ 21:00</div>
+                </div>
+                <div class="match-teams">
+                    <div class="team">
+                        <img src="logobarça.png" alt="FC Barcelona" class="team-logo">
+                        <span class="team-name">FC Barcelona</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <img src="RealMadrid.png" alt="Real Madrid" class="team-logo">
+                        <span class="team-name">Real Madrid</span>
+                    </div>
+                </div>
+                <div class="match-venue">
+                    <i class="venue-icon fas fa-map-marker-alt"></i>
+                    <span>Spotify Camp Nou, Barcelona</span>
+                    <span style="color: #FFD700; font-weight: bold; margin-left: 10px;">⭐ EL CLÁSICO ⭐</span>
+                </div>
+                <div class="match-actions">
+                    <a href="billet.html" class="buy-ticket">🔥 Billets El Clásico</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                <p>© 2026 FC Barcelona. Tous droits réservés.</p>
+            </div>
+            
+            <div class="social-media">
+                <span style="margin-right: 1rem; font-weight: bold;">Suivez-nous :</span>
+                <a href="https://www.facebook.com/fcbarcelona" target="_blank" title="Facebook officiel du FC Barcelona">
+                    <i class="fab fa-facebook"></i>
+                </a>    
+                <a href="https://twitter.com/FCBarcelona" target="_blank" title="Twitter officiel du FC Barcelona">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                
+                <a href="https://www.instagram.com/fcbarcelona/" target="_blank" title="Instagram officiel du FC Barcelona">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                
+                <a href="https://www.youtube.com/user/fcbarcelona" target="_blank" title="YouTube officiel du FC Barcelona">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                
+                <a href="https://www.tiktok.com/@fcbarcelona" target="_blank" title="TikTok officiel du FC Barcelona">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

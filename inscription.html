@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Compte - FC Barcelone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="logobarça.png" type="image/png">
+    <style>
+        /* Styles pour les messages de notification */
+        .notification {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0; /* Caché par défaut */
+            transition: opacity 0.5s ease-in-out; /* Animation */
+        }
+        .notification.success {
+            background-color: #d4edda; /* Vert pâle */
+            color: #155724; /* Vert foncé */
+            border: 1px solid #c3e6cb;
+        }
+        .notification.error {
+            background-color: #f8d7da; /* Rouge pâle */
+            color: #721c24; /* Rouge foncé */
+            border: 1px solid #f5c6cb;
+        }
+        .notification.show {
+            opacity: 1; /* Visible */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> Créer un Compte - FC Barcelona </h1>
+    </header>
+
+    <img src="logobarça.png" alt="Logo Officiel du FC Barcelone" class="photo">
+
+    <div class="login-container">
+        <h2>Rejoins la Famille Barça !</h2>
+        <p>Crée ton compte en quelques secondes.</p>
+
+        <div id="notificationMessage" class="notification"></div>
+
+        <form id="registerForm">
+            <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+            <input type="email" id="email" name="email" placeholder="Adresse e-mail" required>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit">S'inscrire</button>
+        </form>
+
+        <div class="links">
+            <p>Déjà un compte ? <a href="connexion.html">Connecte-toi ici</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                <p>© 2024 FC Barcelona. Tous droits réservés.</p>
+            </div>
+
+            <div class="social-media">
+                <span style="margin-right: 1rem; font-weight: bold;">Suivez-nous :</span>
+                <a href="https://www.facebook.com/fcbarcelona" target="_blank" title="Facebook officiel du FC Barcelona">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/FCBarcelona" target="_blank" title="Twitter officiel du FC Barcelona">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="https://www.instagram.com/fcbarcelona/" target="_blank" title="Instagram officiel du FC Barcelona">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="https://www.youtube.com/user/fcbarcelona" target="_blank" title="YouTube officiel du FC Barcelona">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+                <a href="https://www.tiktok.com/@fcbarcelona" target="_blank" title="TikTok officiel du FC Barcelona">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche l'envoi traditionnel du formulaire (pas de rechargement de page)
+
+            const form = event.target;
+            const formData = new FormData(form); // Récupère toutes les données du formulaire
+
+            const notificationMessage = document.getElementById('notificationMessage');
+            notificationMessage.classList.remove('show', 'success', 'error'); // Réinitialise les classes
+            notificationMessage.textContent = ''; // Vide le message précédent
+
+            // Envoie les données du formulaire au script PHP via Fetch (AJAX)
+            fetch('traitement_inscription.php', {
+                method: 'POST',
+                body: formData // FormData gère automatiquement l'encodage
+            })
+            .then(response => response.json()) // Analyse la réponse JSON du serveur
+            .then(data => {
+                // Affiche le message reçu du serveur
+                notificationMessage.textContent = data.message;
+                if (data.success) {
+                    notificationMessage.classList.add('success');
+                    // Optionnel : Réinitialiser le formulaire après un succès
+                    form.reset();
+                    // Optionnel : Rediriger l'utilisateur après un court délai
+                    // setTimeout(() => {
+                    //     window.location.href = 'connexion.html';
+                    // }, 2000);
+                } else {
+                    notificationMessage.classList.add('error');
+                }
+                notificationMessage.classList.add('show'); // Rend le message visible
+
+                // Fait disparaître le message après 5 secondes
+                setTimeout(() => {
+                    notificationMessage.classList.remove('show');
+                }, 5000);
+            })
+            .catch(error => {
+                console.error('Erreur de réseau ou de traitement:', error);
+                notificationMessage.textContent = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+                notificationMessage.classList.add('error', 'show');
+                setTimeout(() => {
+                    notificationMessage.classList.remove('show');
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

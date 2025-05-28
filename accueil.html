@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - FC Barcelona Tickets</title>
+    <link rel="icon" href="logobarça.png" type="image/png"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1eaea; 
+            color: #333;
+            background-image: url('barccc.jpg'); 
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            padding-bottom: 80px; 
+        }
+
+        header {
+            background-color: #A50044; 
+            color: rgb(255, 255, 255);
+            padding: 1rem 0; 
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0.5rem; 
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            background-color: #003E7E;
+            padding: 0.5rem 0;
+            flex-wrap: wrap; 
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 0.2rem; 
+        }
+
+        nav a:hover {
+            background-color: #002B5C;
+            border-radius: 5px;
+            transform: translateY(-2px); 
+        }
+
+        .nav-auth {
+            margin-left: auto; 
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-auth a {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .nav-auth a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .match-highlight {
+            background-color: #A50044;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+        }
+
+        .match-highlight h2 {
+            margin: 0 0 1rem 0;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .team {
+            text-align: center;
+            margin: 0 2rem;
+        }
+
+        .team img {
+            height: 100px;
+            width: auto;
+        }
+
+        .team p {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .match-highlight .button { 
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #A50044, #003E7E);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        .match-highlight .button:hover {
+            background: linear-gradient(135deg, #7F0033, #002B5C);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1 1 calc(33% - 1.5rem); 
+            max-width: calc(33% - 1.5rem); 
+            border-top: 5px solid #003E7E; 
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature h3 {
+            margin: 0.5rem 0;
+            color: #A50044;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer {
+            background-color: #A50044; 
+            color: white;
+            text-align: center;
+            padding: 0rem 0;
+            position: fixed; 
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-media i {
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .social-media i:hover {
+            color: #FFD700; 
+            transform: scale(1.2);
+        }
+
+       
+        .social-media .fa-facebook:hover {
+            color: #1877F2;
+        }
+
+        .social-media .fa-twitter:hover {
+            color: #1DA1F2;
+        }
+
+        .social-media .fa-instagram:hover {
+            color: #E4405F;
+        }
+
+        .social-media .fa-youtube:hover {
+            color: #FF0000;
+        }
+
+        .social-media .fa-tiktok:hover {
+            color: #000000;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-auth {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .logos {
+                flex-direction: column;
+            }
+
+            .team {
+                margin: 1rem 0;
+            }
+
+            .features {
+                flex-direction: column;
+            }
+
+            .feature {
+                max-width: 100%;
+                flex: 1 1 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue au FC Barcelona</h1>
+        <p>Réservez vos billets pour les matchs et vivez l'excitation au Camp Nou</p>
+    </header>
+
+    <nav>
+        <a href="accueil.html"><i class="fas fa-home"></i> Accueil</a>
+        <a href="calendrier.html"><i class="fas fa-calendar-alt"></i> Calendrier</a>
+        <a href="stade.html"><i class="fas fa-map-marker-alt"></i> Stade</a>
+        
+        <div class="nav-auth">
+            <a href="connexion.html"><i class="fas fa-sign-in-alt"></i> Déconnexion</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="match-highlight">
+            <h2>Prochain Match</h2>
+            <div class="logos">
+                <div class="team">
+                    <img src="logobarça.png" alt="Logo FC Barcelona">
+                    <p>FC Barcelona</p>
+                </div>
+                <p style="font-size: 1.5rem; font-weight: bold; margin: 0 2rem;">VS</p>
+                <div class="team">
+                    <img src="RealBetis.png" alt="Logo Real Betis"> <p>Real Betis</p>
+                </div>
+            </div>
+            <p>Dimanche 20 Juillet 2025, 19h00 - Spotify Camp Nou</p>
+            <p id="countdown" class="countdown">Calcul du compte à rebours...</p>
+            <a href="billet.html" class="button">Acheter des Tickets</a>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <i class="fas fa-futbol fa-3x" style="color: #A50044;"></i>
+                <h3>Matchs en Direct</h3>
+                <p>Vivez l'ambiance électrique des matchs en direct au stade.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-star fa-3x" style="color: #003E7E;"></i>
+                <h3>Expériences VIP</h3>
+                <p>Profitez d'une expérience exclusive avec nos offres premium.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-tags fa-3x" style="color: #A50044;"></i>
+                <h3>Promotions</h3>
+                <p>Bénéficiez des meilleures offres sur les billets pour certains matchs.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                <p>© 2024 FC Barcelona. Tous droits réservés.</p>
+            </div>
+            
+            <div class="social-media">
+                <span style="margin-right: 1rem; font-weight: bold;">Suivez-nous :</span>
+                <a href="https://www.facebook.com/fcbarcelona" target="_blank" title="Facebook officiel du FC Barcelona">
+                    <i class="fab fa-facebook"></i>
+                </a>    
+                <a href="https://twitter.com/FCBarcelona" target="_blank" title="Twitter officiel du FC Barcelona">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                
+                <a href="https://www.instagram.com/fcbarcelona/" target="_blank" title="Instagram officiel du FC Barcelona">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                
+                <a href="https://www.youtube.com/user/fcbarcelona" target="_blank" title="YouTube officiel du FC Barcelona">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                
+                <a href="https://www.tiktok.com/@fcbarcelona" target="_blank" title="TikTok officiel du FC Barcelona">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateCountdown() {
+            // Date du match : 20 Juillet 2025, 19h00 (format 'YYYY-MM-DDTHH:MM:SS')
+            const eventDate = new Date('2025-07-20T19:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            if (timeLeft < 0) {
+                document.getElementById('countdown').innerText = "Le match a commencé ou est terminé.";
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerText =
+                `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes restants `;
+        }
+        // Mettre à jour le compte à rebours toutes les secondes
+        setInterval(updateCountdown, 1000);
+        // Appeler la fonction une fois au chargement pour éviter un délai initial
+        updateCountdown();
+    </script>
+</body>
+</html>

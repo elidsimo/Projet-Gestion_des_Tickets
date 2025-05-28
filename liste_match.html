@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendrier des Matches - FC Barcelona</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url(nnon.jpg);
+            color: #333;
+        }
+
+        header {
+            background-color: #003E7E;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #A50044;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        nav a:hover {
+            background-color: #7F0033;
+            border-radius: 5px;
+            transform: translateY(-5px);
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .match-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .match-table th, .match-table td {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .match-table th {
+            background-color: #003E7E;
+            color: white;
+        }
+
+        .match-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .match-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        footer {
+            background-color: #003E7E;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: #A50044;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .team-logo {
+            width: 30px;
+            height: auto;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calendrier des Matches - FC Barcelona</h1>
+    </header>
+
+    <main>
+        <table class="match-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Équipe Adverse</th>
+                    <th>Lieu</th>
+                    <th>Heure</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>25 Janvier 2025</td>
+                    <td><img src="Getafe_(logo).svg.png" alt="Getafe logo" class="team-logo"> Getafe</td>
+                    <td>Camp Nou</td>
+                    <td>20:00</td>
+                </tr>
+                <tr>
+                    <td>1 Février 2025</td>
+                    <td><img src="benefica.png" alt="Benfica logo" class="team-logo"> Benfica</td>
+                    <td>Camp nou</td>
+                    <td>21:00</td>
+                </tr>
+                <tr>
+                    <td>15 Février 2025</td>
+                    <td><img src="logo_las palmas.png" alt="Las Palmas" class="team-logo"> Las Palmas</td>
+                    <td>Stade de Grande Canarie</td>
+                    <td>18:00</td>
+                </tr>
+                <tr>
+                    <td>28 Février 2025</td>
+                    <td><img src="sevilla.png" alt="Sevilla FC logo" class="team-logo"> Sevilla FC</td>
+                    <td>Stade Ramón Sánchez Pizjuán</td>
+                    <td>16:15</td>
+                </tr>
+                <tr>
+                    <td>4 Mars 2025</td>
+                    <td><img src="atletico.png" alt="Atlético Madrid logo" class="team-logo"> Atlético Madrid</td>
+                    <td>Estadio Metropolitano</td>
+                    <td>18:00</td>
+                </tr>
+                <tr>
+                    <td>11 Mai 2025</td>
+                    <td><img src="realmadrid.png" alt="Real Madrid logo" class="team-logo"> Real Madrid</td>
+                    <td>Camp Nou</td>
+                    <td>21:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FC Barcelona. Tous droits réservés. <a href="#">Mentions Légales</a></p>
+    </footer>
+</body>
+</html>

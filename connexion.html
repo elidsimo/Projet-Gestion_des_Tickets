@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connectez-vous pour gérer vos billets et accéder à votre espace supporter du FC Barcelone.">
+    <meta name="keywords" content="connexion, FC Barcelone, billets, tickets, stade, Barça, supporter">
+    <title>Accès Supporter - FC Barcelone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="logobarça.png" type="image/png">
+    <style>
+        /* Styles pour les messages de notification */
+        .notification {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0; /* Caché par défaut */
+            transition: opacity 0.5s ease-in-out; /* Animation */
+        }
+        .notification.success {
+            background-color: #d4edda; /* Vert pâle */
+            color: #155724; /* Vert foncé */
+            border: 1px solid #c3e6cb;
+        }
+        .notification.error {
+            background-color: #f8d7da; /* Rouge pâle */
+            color: #721c24; /* Rouge foncé */
+            border: 1px solid #f5c6cb;
+        }
+        .notification.show {
+            opacity: 1; /* Visible */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Accès Supporter - FC Barcelona</h1>
+    </header>
+
+    <img src="logobarça.png" alt="Logo Officiel du FC Barcelone" class="photo">
+
+    <div class="login-container">
+        <h2>Bienvenue</h2>
+        <p>Connecte-toi pour gérer tes matchs et tes billets.</p>
+
+        <div id="notificationMessage" class="notification"></div>
+
+        <form id="loginForm">
+            <input type="email" id="email" name="email" placeholder="Adresse e-mail" required>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit">Accéder à mon compte</button>
+        </form>
+
+        <div class="links">
+            <a href="passwd.html">J'ai oublié mon mot de passe</a>
+            <a href="inscription.html">Je n'ai pas encore de compte</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                <p>© 2024 FC Barcelona. Tous droits réservés.</p>
+            </div>
+
+            <div class="social-media">
+                <span style="margin-right: 1rem; font-weight: bold;">Suivez-nous :</span>
+                <a href="https://www.facebook.com/fcbarcelona" target="_blank" title="Facebook officiel du FC Barcelona">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/FCBarcelona" target="_blank" title="Twitter officiel du FC Barcelona">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/fcbarcelona/" target="_blank" title="Instagram officiel du FC Barcelona">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/user/fcbarcelona" target="_blank" title="YouTube officiel du FC Barcelona">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.tiktok.com/@fcbarcelona" target="_blank" title="TikTok officiel du FC Barcelona">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page par le formulaire
+
+            const form = event.target;
+            const formData = new FormData(form); // Récupère les données du formulaire
+
+            const notificationMessage = document.getElementById('notificationMessage');
+            // Réinitialise l'état du message pour une nouvelle soumission
+            notificationMessage.classList.remove('show', 'success', 'error');
+            notificationMessage.textContent = ''; // Vide le contenu précédent
+
+            // Envoie les données au script PHP via Fetch (AJAX)
+            fetch('traitement_connexion.php', {
+                method: 'POST',
+                body: formData // FormData gère automatiquement l'encodage
+            })
+            .then(response => response.json()) // Traite la réponse comme du JSON
+            .then(data => {
+                // Affiche le message reçu du serveur
+                notificationMessage.textContent = data.message;
+                if (data.success) {
+                    notificationMessage.classList.add('success');
+                    // Redirige l'utilisateur après un court délai pour qu'il voie le message de succès
+                    setTimeout(() => {
+                        window.location.href = data.redirect; // Utilise l'URL de redirection fournie par PHP
+                    }, 1500); // 1.5 secondes de délai
+                } else {
+                    notificationMessage.classList.add('error');
+                    // Réinitialise le champ mot de passe en cas d'échec pour des raisons de sécurité
+                    document.getElementById('password').value = '';
+                }
+                notificationMessage.classList.add('show'); // Rend le message visible
+
+                // Si la connexion échoue, le message reste visible 5 secondes avant de disparaître
+                if (!data.success) {
+                    setTimeout(() => {
+                        notificationMessage.classList.remove('show');
+                    }, 5000); // 5 secondes de délai
+                }
+            })
+            .catch(error => {
+                // Gère les erreurs de réseau ou de traitement côté client
+                console.error('Erreur:', error);
+                notificationMessage.textContent = 'Une erreur de communication est survenue. Veuillez réessayer.';
+                notificationMessage.classList.add('error', 'show');
+                setTimeout(() => {
+                    notificationMessage.classList.remove('show');
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
